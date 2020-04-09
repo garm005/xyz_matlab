@@ -9,4 +9,4 @@
 % Gabriel Ruiz, 2014
 % LAPCOF
 % _________________________________________________________________________
-addpath(genpath('C:\Users\Gabriel\Documents\Matlab_Files\xyz_matlab_scripts'));
+addpath(genpath('C:\Users\lapcof\Documents\Cancun\xyz_scripts_matlab'));
