@@ -63,6 +63,7 @@ ylabel('Y [m]');
 %pause(0.01);
 %jframe.setMaximized(true);
 
+% Exportando la triada a un archivo de datos
 if flag1 == 1
     tri =[datos.XX(:) datos.YY(:) datos.ZZ(:)];
     fid = fopen(horzcat(ruta,'data.txt'),'w');
