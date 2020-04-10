@@ -1,13 +1,14 @@
-function datos = xyz_b_grd2matlab
+function datos = xyz_b_grd2matlab(flag1)
 % ________________________________________________________________________
 % Funcion que carga en matlab los datos que se encuentran en un archivo
 % grd, generado con surfer (GRD 6 Surfer Text Grid) y grafica el mapa de 
 % contornos.
 % Sintaxis:
-%        var_output = xyz_grd2matlab
+%        var_output = xyz_grd2matlab(flag1)
 % Inputs:
 %        A traves de una ventana grafica se proporcionara la ubicacion del 
 %        archivo grd
+%        Si flag1 = 1, la triada de punto se exporta a un archivo txt.
 %
 % Output:
 %        grafico con el mapa de contornos
@@ -15,7 +16,7 @@ function datos = xyz_b_grd2matlab
 %        funcion
 %
 % Ejemplo:
-%        datos = xyz_preview_ptos;
+%        datos = xyz_b_grd2matlab(1);
 %
 % Esta funcion usa el script de Alberto para cargar en matlab el grd.
 % Gabriel Ruiz 2014
@@ -58,12 +59,23 @@ colorbar;
 title('Bathymetry');
 xlabel('X [m]');
 ylabel('Y [m]');
-jframe = get(handle(gcf),'JavaFrame');
-pause(0.01);
-jframe.setMaximized(true);
+%jframe = get(handle(gcf),'JavaFrame');
+%pause(0.01);
+%jframe.setMaximized(true);
+
+if flag1 == 1
+    tri =[datos.XX(:) datos.YY(:) datos.ZZ(:)];
+    fid = fopen(horzcat(ruta,'data.txt'),'w');
+    fprintf('Exportando los datos hacia archivo txt...\n');
+    for i = 1: length(tri)
+        fprintf(fid,'%11.3f %11.3f %9.3f\r\n',tri(i,1),tri(i,2),tri(i,3));
+    end
+    fclose('all');
+end
 
 % Exportando a archivo la grafica
 %print(gcf,'-dpng','-r300',horzcat(nexport,'.png'));
+fprintf('La funcion ha concluido!\n');
 return
 
 function [matrix xmin xmax ymin ymax nx ny]=grd_read_v2(namefile)
